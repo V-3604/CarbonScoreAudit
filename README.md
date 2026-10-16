@@ -1,15 +1,18 @@
 # What Does a Carbon Score Measure?
 
 Code for *What Does a Carbon Score Measure? A Case Study of Three Cities in an Urban Emissions
-Benchmark*, accepted at Tackling Climate Change with Machine Learning, workshop at NeurIPS 2026.
+Benchmark*, Tackling Climate Change with Machine Learning workshop at NeurIPS 2026.
 
-Several recent urban prediction models train on ODIAC carbon as a target. ODIAC builds its urban
-spatial pattern from two components: nighttime lights, which is itself a target in these
-benchmarks, and a power-plant database with a 2007 base year. This repository contains the code
-that measures how much of a carbon score on a released three-city benchmark each component
-explains, and the detection rule that flags the affected tiles from the raster alone.
+Several urban prediction models train on ODIAC carbon as a target. ODIAC builds its urban spatial
+pattern from two components: nighttime lights, which these benchmarks also use as a target, and a
+power-plant database with a 2007 base year. On the three-city benchmark released with UrbanMoE
+(Liu et al., WWW 2026), this code measures how much of the carbon score each component explains,
+and flags the tiles that hold injected plant values from the ODIAC raster alone, before any model
+is trained.
 
-## Requirements
+![Figure 1](figures/odiac_label.png)
+
+## Setup
 
 Python 3.11.
 
@@ -17,88 +20,89 @@ Python 3.11.
 pip install -r requirements.txt
 ```
 
-CPU is sufficient for every analysis step. The embedding step (`urbanmoe_embed.py`) is much faster
-on a GPU but does not require one.
+Only `embed_images.py` benefits from a GPU (it takes about 30 minutes on a CPU). Once their
+inputs are in place, the analysis steps each run on a CPU in under a minute. The first run of
+`odiac.py` spends about 20 minutes downloading, and `count_pois.py` spends most of its time
+parsing the OSM extracts.
 
 ## Data
 
-No third-party data is redistributed here. Each source is public and must be obtained from its
-provider:
+No third-party data is redistributed. Each source is public:
 
-| Source | Used for | Licence |
-|---|---|---|
-| The benchmark release (4,959 tiles, Shanghai / Beijing / New York, with `c_value`, `pop_value`, `light_value`) | tiles and targets | per its authors |
-| [ODIAC](https://db.cger.nies.go.jp/dataset/ODIAC/) 1 km monthly rasters, fetched through the [US Greenhouse Gas Center](https://earth.gov) raster API | rebuilding the carbon label | CC BY 4.0 |
-| [OpenStreetMap](https://download.geofabrik.de/) regional extracts (`.osm.pbf`) | POI and land-use blocks | ODbL |
-| [WRI Global Power Plant Database v1.3.0](https://datasets.wri.org/dataset/globalpowerplantdatabase) | plant cross-check and placebo | CC BY 4.0 |
-
-Expected layout:
-
-```
-data/raw/urbanmoe/                          benchmark tiles and label CSVs
-data/raw/osm_extracts/*.osm.pbf             OSM regional extracts
-data/external/global_power_plant_database.csv
-data/external/odiac/crops/                  written by the vintage sweep
-```
+- **Benchmark release**: 4,959 tiles over Shanghai, Beijing and New York with `c_value`,
+  `pop_value` and `light_value`. Extract it into `data/raw/urbanmoe/` so that it contains
+  `shanghai/`, `beijing/` and `NewWork/` (the release's own spelling).
+- **OpenStreetMap**: `china-latest.osm.pbf` and `us-northeast-latest.osm.pbf` from
+  [Geofabrik](https://download.geofabrik.de/) (about 1.5 GB and 1.7 GB, ODbL), in
+  `data/raw/osm_extracts/`.
+- **WRI Global Power Plant Database v1.3.0**: the CSV from
+  [WRI](https://datasets.wri.org/dataset/globalpowerplantdatabase) (CC BY 4.0), saved as
+  `data/external/global_power_plant_database.csv`.
+- **ODIAC**: downloaded by `odiac.py` from the [US Greenhouse Gas Center](https://earth.gov)
+  raster API (CC BY 4.0, no account needed): 468 monthly city crops, about 31 MB.
 
 ## Reproducing the paper
 
-Run in order. Every step writes a JSON report to `artifacts/reports/`; the reports behind the
-published numbers are included in `artifacts/` so the tables can be checked without re-running
-anything.
-
-**Features**
+Run each script from the repository root, in this order:
 
 ```
-python scripts/urbanmoe_embed.py                          # frozen SigLIP embeddings
-python scripts/urbanmoe_poi_density.py --dry-run          # tile bounding-box index
-python scripts/urbanmoe_poi_density_local.py              # POI counts, all tiles
-python scripts/urbanmoe_osm_layers.py                     # emitter / industry / built layers
-python scripts/urbanmoe_build_features.py                 # aligned per-city bundles
+python scripts/build_tile_index.py
+python scripts/embed_images.py
+python scripts/count_pois.py
+python scripts/build_features.py
+python scripts/odiac.py
+python scripts/point_sources.py
+python scripts/carbon_from_light.py
+python scripts/label_screen.py
+python scripts/point_features.py
+python scripts/sufficiency_test.py
+python scripts/make_figure.py
+python scripts/check_paper_numbers.py
 ```
 
-**Analysis**
+`odiac.py` and `count_pois.py` accept `--dry-run` to check inputs before any download or parse.
 
-| Command | Produces |
-|---|---|
-| `python scripts/urbanmoe_probe.py` | image+POI pipeline scores (carbon 0.786 / 0.440 / 0.456) |
-| `python scripts/urbanmoe_probe_poi.py` | block ablation: image only, POI only, image+POI (image+text+POI when text embeddings are present) |
-| `python scripts/urbanmoe_label_audit.py` | coupling between the three targets |
-| `python scripts/urbanmoe_odiac_vintage.py` | ODIAC year and version sweep (appendix) |
-| `python scripts/urbanmoe_carbon_from_light.py` | **Table 1**, carbon recoverable from the light target (54% / 84% / 111%) |
-| `python scripts/urbanmoe_power_plants.py` | worst-tile proximity to real plants, with renewable placebo |
-| `python scripts/urbanmoe_odiac_pointsources.py --year 2015` | point-source detection rule and plant cross-check |
-| `python scripts/urbanmoe_label_screen.py` | **Table 2**, error and variance shares, screened scores |
-| `python scripts/urbanmoe_plant_features.py` | sufficiency test |
-| `python scripts/make_odiac_figure.py --year 2015` | **Figure 1** |
+The reports behind the published numbers are included in `reports/`, so
+`python scripts/check_paper_numbers.py` checks every number in the paper against them without
+rerunning anything. Rerunning a step overwrites its report, and `git diff reports/` shows whether
+anything changed.
 
-Scores use a 60/20/20 split over ten seeds, with R2 computed in the original target space. The
-plant-proximity diagnostics in `urbanmoe_power_plants.py` and `urbanmoe_odiac_pointsources.py` use
-a separate 5-fold protocol; the two are never mixed, and no score from the 5-fold arm appears in
-the paper's tables.
+## Where each result comes from
+
+- **Section 2, provenance and scale**: `odiac.py` (the rebuild against the label for every year
+  2012-2022 under ODIAC2024, and for 2015 under three ODIAC versions) and `point_sources.py`
+  (the label-per-tonne scaling of each city).
+- **Table 1**: `carbon_from_light.py`.
+- **Flagged cells against the WRI plant database**: `point_sources.py`.
+- **Table 2 and the falsified prediction**: `label_screen.py`. Nothing is retrained and the
+  model never sees the point term; only the set of test tiles changes.
+- **Point sources and Figure 1**: `point_sources.py` and `make_figure.py`.
+- **Sufficiency test**: `point_features.py` writes the three point-source columns and
+  `sufficiency_test.py` scores them. The columns are inputs from which the label was built, so
+  this is not a performance result.
+- **Appendix**: the detection rule is in `point_sources.py`, the year and version check in
+  `odiac.py`.
+
+## Protocol
+
+Every score is a ridge probe on frozen features over ten random 60/20/20 splits (seeds 41-50).
+Features are standardised on the training rows, carbon is fitted on log1p, and R2 is computed on
+raw values. Image features are frozen `google/siglip-so400m-patch14-384` embeddings; the POI block
+is rebuilt from OpenStreetMap because the benchmark's own POI data was not released.
+
+Point-source results use ODIAC2024 for 2015 with a detection threshold of K = 20. The rebuild
+matches the label equally well for every year from 2012 to 2022, and for 2015 it is identical
+under ODIAC2022, 2023 and 2024, so neither choice changes a result.
 
 ## Layout
 
 ```
-scripts/     analysis pipeline
-  common.py      shared paths and feature-bundle loading
-  plotting.py    figure styling and output
-artifacts/   result JSONs behind the reported numbers, plus the tile bbox index
-figures/     written by make_odiac_figure.py
+scripts/     one script per step above; common.py and probe.py hold shared code
+reports/     JSON reports behind the published numbers, and the tile index
+figures/     Figure 1
+data/        inputs (not tracked)
+artifacts/   embeddings and feature bundles (not tracked)
 ```
-
-## Notes on interpretation
-
-Two framings in the paper are load-bearing and are repeated in the code:
-
-The tile removal in `urbanmoe_label_screen.py` is a reporting intervention, not a feature. The
-model is never shown the point term and nothing is retrained; only which tiles count toward the
-reported score changes. Removing tiles removes variance as well as error, so both shares are
-reported, and the score rises only where the error share exceeds the variance share.
-
-The feature test in `urbanmoe_plant_features.py` is a sufficiency test, not a performance result.
-The columns that close the gap are inputs to the label's construction, which no deployed model
-would have.
 
 ## Citation
 
@@ -114,4 +118,4 @@ would have.
 
 ## Licence
 
-Code is released under the MIT Licence. The data sources listed above carry their own licences.
+The code is released under the MIT Licence. The data sources above carry their own licences.

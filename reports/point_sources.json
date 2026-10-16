@@ -1,0 +1,278 @@
+{
+ "odiac_version": "v2024",
+ "odiac_year": 2015,
+ "detection_ratio": 20.0,
+ "ring_cells": [
+  2,
+  4
+ ],
+ "carried_at_least": 0.5,
+ "absent_below": 0.1,
+ "newyork_label_scale_over": {
+  "beijing": 9.013018275983018,
+  "shanghai": 12.157337926575796
+ },
+ "cities": {
+  "shanghai": {
+   "n_tiles": 1558,
+   "n_tiles_both_positive": 1514,
+   "n_flagged_cells": 14,
+   "n_sources": 11,
+   "share_of_city_emission": 0.2579584115565418,
+   "n_tiles_with_point_mass": 17,
+   "plant_cross_check": {
+    "fossil": {
+     "n_plants": 17,
+     "min_capacity_mw": 50.0,
+     "frac_flagged_cells_near_a_plant": 0.6428571428571429,
+     "median_km_cell_to_plant": 0.5333947105959176
+    },
+    "renewable": {
+     "n_plants": 5,
+     "min_capacity_mw": 0.0,
+     "frac_flagged_cells_near_a_plant": 0.0,
+     "median_km_cell_to_plant": 25.760037778570833
+    }
+   },
+   "label_carrying": {
+    "n_source_tiles": 10,
+    "n_carried": 1,
+    "n_partial": 1,
+    "n_absent": 8,
+    "median_shortfall": 0.028843631724057052,
+    "p_source_tiles_lower": 9.648270923969146e-06,
+    "label_per_tonne_c": 6.703075541942728e-05,
+    "label_total": 3778.3030302079997,
+    "expected_label_total": 5160.205434018857,
+    "deficit_frac": 0.26779988151258693,
+    "deficit_frac_from_absent_sources": 0.2273242307654334
+   },
+   "ratio_sweep": [
+    {
+     "ratio_threshold": 5.0,
+     "n_flagged_cells": 25,
+     "n_sources": 20,
+     "share_of_city_emission": 0.2613864918403503
+    },
+    {
+     "ratio_threshold": 10.0,
+     "n_flagged_cells": 18,
+     "n_sources": 15,
+     "share_of_city_emission": 0.26020683641736647
+    },
+    {
+     "ratio_threshold": 20.0,
+     "n_flagged_cells": 14,
+     "n_sources": 11,
+     "share_of_city_emission": 0.2579584115565418
+    },
+    {
+     "ratio_threshold": 50.0,
+     "n_flagged_cells": 12,
+     "n_sources": 9,
+     "share_of_city_emission": 0.2527644530436824
+    },
+    {
+     "ratio_threshold": 100.0,
+     "n_flagged_cells": 11,
+     "n_sources": 8,
+     "share_of_city_emission": 0.24966448922992807
+    }
+   ],
+   "versions_at_2015": {
+    "v2022": {
+     "n_source_tiles": 10,
+     "n_carried": 1,
+     "n_partial": 1,
+     "n_absent": 8
+    },
+    "v2023": {
+     "n_source_tiles": 10,
+     "n_carried": 1,
+     "n_partial": 1,
+     "n_absent": 8
+    },
+    "v2024": {
+     "n_source_tiles": 10,
+     "n_carried": 1,
+     "n_partial": 1,
+     "n_absent": 8
+    }
+   }
+  },
+  "beijing": {
+   "n_tiles": 2310,
+   "n_tiles_both_positive": 2163,
+   "n_flagged_cells": 8,
+   "n_sources": 8,
+   "share_of_city_emission": 0.10852203031070173,
+   "n_tiles_with_point_mass": 13,
+   "plant_cross_check": {
+    "fossil": {
+     "n_plants": 11,
+     "min_capacity_mw": 50.0,
+     "frac_flagged_cells_near_a_plant": 0.875,
+     "median_km_cell_to_plant": 0.3258352667741612
+    },
+    "renewable": {
+     "n_plants": 7,
+     "min_capacity_mw": 0.0,
+     "frac_flagged_cells_near_a_plant": 0.0,
+     "median_km_cell_to_plant": 33.38728189519777
+    }
+   },
+   "label_carrying": {
+    "n_source_tiles": 7,
+    "n_carried": 7,
+    "n_partial": 0,
+    "n_absent": 0,
+    "median_shortfall": 1.0660093756254807,
+    "p_source_tiles_lower": 0.9918137594839311,
+    "label_per_tonne_c": 9.041538807029096e-05,
+    "label_total": 6018.1146377785,
+    "expected_label_total": 5821.637356513189,
+    "deficit_frac": -0.03374948819948287,
+    "deficit_frac_from_absent_sources": 0.0
+   },
+   "ratio_sweep": [
+    {
+     "ratio_threshold": 5.0,
+     "n_flagged_cells": 9,
+     "n_sources": 9,
+     "share_of_city_emission": 0.11630524419449968
+    },
+    {
+     "ratio_threshold": 10.0,
+     "n_flagged_cells": 9,
+     "n_sources": 9,
+     "share_of_city_emission": 0.11630524419449968
+    },
+    {
+     "ratio_threshold": 20.0,
+     "n_flagged_cells": 8,
+     "n_sources": 8,
+     "share_of_city_emission": 0.10852203031070173
+    },
+    {
+     "ratio_threshold": 50.0,
+     "n_flagged_cells": 5,
+     "n_sources": 5,
+     "share_of_city_emission": 0.09467106517999992
+    },
+    {
+     "ratio_threshold": 100.0,
+     "n_flagged_cells": 3,
+     "n_sources": 3,
+     "share_of_city_emission": 0.06972918484007487
+    }
+   ],
+   "versions_at_2015": {
+    "v2022": {
+     "n_source_tiles": 7,
+     "n_carried": 7,
+     "n_partial": 0,
+     "n_absent": 0
+    },
+    "v2023": {
+     "n_source_tiles": 7,
+     "n_carried": 7,
+     "n_partial": 0,
+     "n_absent": 0
+    },
+    "v2024": {
+     "n_source_tiles": 7,
+     "n_carried": 7,
+     "n_partial": 0,
+     "n_absent": 0
+    }
+   }
+  },
+  "newyork": {
+   "n_tiles": 1091,
+   "n_tiles_both_positive": 1063,
+   "n_flagged_cells": 22,
+   "n_sources": 22,
+   "share_of_city_emission": 0.2722222710315606,
+   "n_tiles_with_point_mass": 29,
+   "plant_cross_check": {
+    "fossil": {
+     "n_plants": 21,
+     "min_capacity_mw": 50.0,
+     "frac_flagged_cells_near_a_plant": 0.5909090909090909,
+     "median_km_cell_to_plant": 0.49632580751104816
+    },
+    "renewable": {
+     "n_plants": 22,
+     "min_capacity_mw": 0.0,
+     "frac_flagged_cells_near_a_plant": 0.22727272727272727,
+     "median_km_cell_to_plant": 14.277990460004808
+    }
+   },
+   "label_carrying": {
+    "n_source_tiles": 15,
+    "n_carried": 8,
+    "n_partial": 4,
+    "n_absent": 3,
+    "median_shortfall": 1.0543647039100739,
+    "p_source_tiles_lower": 0.22131891722350594,
+    "label_per_tonne_c": 0.0008149155451076293,
+    "label_total": 6433.450580805,
+    "expected_label_total": 7495.715912062923,
+    "deficit_frac": 0.1417163275289569,
+    "deficit_frac_from_absent_sources": 0.10710268356891467
+   },
+   "ratio_sweep": [
+    {
+     "ratio_threshold": 5.0,
+     "n_flagged_cells": 32,
+     "n_sources": 28,
+     "share_of_city_emission": 0.2834441671031608
+    },
+    {
+     "ratio_threshold": 10.0,
+     "n_flagged_cells": 27,
+     "n_sources": 25,
+     "share_of_city_emission": 0.28117589922970115
+    },
+    {
+     "ratio_threshold": 20.0,
+     "n_flagged_cells": 22,
+     "n_sources": 22,
+     "share_of_city_emission": 0.2722222710315606
+    },
+    {
+     "ratio_threshold": 50.0,
+     "n_flagged_cells": 12,
+     "n_sources": 12,
+     "share_of_city_emission": 0.23125342563217394
+    },
+    {
+     "ratio_threshold": 100.0,
+     "n_flagged_cells": 8,
+     "n_sources": 8,
+     "share_of_city_emission": 0.2090680291480559
+    }
+   ],
+   "versions_at_2015": {
+    "v2022": {
+     "n_source_tiles": 15,
+     "n_carried": 8,
+     "n_partial": 4,
+     "n_absent": 3
+    },
+    "v2023": {
+     "n_source_tiles": 15,
+     "n_carried": 8,
+     "n_partial": 4,
+     "n_absent": 3
+    },
+    "v2024": {
+     "n_source_tiles": 15,
+     "n_carried": 8,
+     "n_partial": 4,
+     "n_absent": 3
+    }
+   }
+  }
+ }
+}

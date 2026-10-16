@@ -2,9 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 
-# Third-party data and everything the pipeline regenerates
+# Inputs and intermediate arrays; see the README for where each input comes from.
 data/
-artifacts/embeddings/
-artifacts/features/
-artifacts/reports/
-figures/
+artifacts/
