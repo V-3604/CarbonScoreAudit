@@ -1,0 +1,176 @@
+{
+ "question": "does screening out tiles whose label carries an injected ODIAC point source change what the benchmark reports for carbon?",
+ "framing_constraint": "the screen is a REPORTING intervention on a model that never sees the point term. No number here is a performance claim and none of it belongs in a table against UrbanMoE.",
+ "screen_rule": "flagged = area-weighted ODIAC injected point mass inside the tile > 0, under the \u00a74.15 C2 detection (ratio K=20, ODIAC2024, year 2015)",
+ "protocol": {
+  "arm": "image+POI ridge on the DEFAULT bundle, carbon target, log1p transform, R2 scored in the original carbon space",
+  "split": "published 60/20/20, identical folds across both scores, no retraining",
+  "seeds": [
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50
+  ]
+ },
+ "prereg": {
+  "written": "2026-08-29, before the first run; sealed in the module docstring",
+  "P-S1": "flagged tiles carry >= 5x their tile share of test squared error in Beijing and New York, and < 5x in Shanghai",
+  "P-S2": "|delta R2| is larger for Beijing than for Shanghai",
+  "P-S3": "no sign is predicted for delta R2; any directional reading is post hoc",
+  "power_caveat": "17/13/29 flagged tiles of 1558/2310/1091, so ~3/3/6 per test fold; the squared-error share is the stable statistic and a null on P-S2 is a plausible outcome of sample size"
+ },
+ "cities": {
+  "shanghai": {
+   "n_tiles": 1558,
+   "n_flagged": 17,
+   "flagged_frac_of_city": 0.010911424903722721,
+   "mean_flagged_per_test_fold": 2.8,
+   "r2_full_mean": 0.7857947023923517,
+   "r2_full_per_seed": [
+    0.8476027614024166,
+    0.8280647019807478,
+    0.822105993184067,
+    0.8043461661971828,
+    0.7513380065716766,
+    0.8105270635635251,
+    0.7459748585123049,
+    0.637502101559033,
+    0.8126600587177969,
+    0.7978253122347654
+   ],
+   "r2_screened_mean": 0.804808488698608,
+   "r2_screened_per_seed": [
+    0.8474520792952335,
+    0.8282166717015029,
+    0.8231604599416322,
+    0.804315894032259,
+    0.751628444178276,
+    0.8106173443485348,
+    0.7468715541042725,
+    0.8244900684752564,
+    0.813084406514525,
+    0.7982479643945883
+   ],
+   "r2_paired": {
+    "mean_delta": 0.019013786306256462,
+    "paired_sigma": 0.05902134544610107,
+    "t": 1.0187309560131728,
+    "p": 0.33493300612094035,
+    "significant_at_0_05": false
+   },
+   "sse_share_flagged_mean": 0.06397686873689858,
+   "sst_share_flagged_mean": 0.021306458531840447,
+   "tile_share_flagged_mean": 0.008974358974358974,
+   "sse_concentration_multiple": 7.128851087825842,
+   "meets_5x_sse_concentration": true
+  },
+  "beijing": {
+   "n_tiles": 2310,
+   "n_flagged": 13,
+   "flagged_frac_of_city": 0.005627705627705628,
+   "mean_flagged_per_test_fold": 2.6,
+   "r2_full_mean": 0.44026228670445516,
+   "r2_full_per_seed": [
+    0.7766269601942042,
+    0.36750887609396987,
+    0.5874205439612461,
+    0.45605818636399753,
+    0.10832538109603529,
+    0.14049396744418086,
+    0.11093539796452667,
+    0.8118457380211348,
+    0.3346646660938166,
+    0.7087431498114397
+   ],
+   "r2_screened_mean": 0.7711621971164726,
+   "r2_screened_per_seed": [
+    0.8081050119785158,
+    0.7804502508016669,
+    0.8178269080031714,
+    0.6592385853148994,
+    0.7424951489353,
+    0.6992225719376612,
+    0.8348124054935375,
+    0.8124931410295586,
+    0.8149586083288852,
+    0.7420193393415309
+   ],
+   "r2_paired": {
+    "mean_delta": 0.3308999104120175,
+    "paired_sigma": 0.2668895259402224,
+    "t": 3.920713601484728,
+    "p": 0.003507164781472011,
+    "significant_at_0_05": true
+   },
+   "sse_share_flagged_mean": 0.6438058126763633,
+   "sst_share_flagged_mean": 0.48893922287863034,
+   "tile_share_flagged_mean": 0.005627705627705629,
+   "sse_concentration_multiple": 114.39934056018453,
+   "meets_5x_sse_concentration": true
+  },
+  "newyork": {
+   "n_tiles": 1091,
+   "n_flagged": 29,
+   "flagged_frac_of_city": 0.026581118240146653,
+   "mean_flagged_per_test_fold": 5.0,
+   "r2_full_mean": 0.45595028323819503,
+   "r2_full_per_seed": [
+    0.7462985235502478,
+    0.5466195422844491,
+    0.6931557642325448,
+    0.5613797834208966,
+    0.09983294060278058,
+    0.6642479942211081,
+    0.5186546997435435,
+    0.2525786226111828,
+    0.19335664127170848,
+    0.28337832044348865
+   ],
+   "r2_screened_mean": 0.754376892092391,
+   "r2_screened_per_seed": [
+    0.7461846349808001,
+    0.8677232697011666,
+    0.7650026351585789,
+    0.790349202453669,
+    0.7526442059906835,
+    0.6658567985960222,
+    0.5406856204300396,
+    0.813774210221759,
+    0.8076486764876922,
+    0.7938996669034981
+   ],
+   "r2_paired": {
+    "mean_delta": 0.2984266088541959,
+    "paired_sigma": 0.2686778142710695,
+    "t": 3.512414305363235,
+    "p": 0.006593555844324586,
+    "significant_at_0_05": true
+   },
+   "sse_share_flagged_mean": 0.568840307016243,
+   "sst_share_flagged_mean": 0.3965514490306853,
+   "tile_share_flagged_mean": 0.022935779816513763,
+   "sse_concentration_multiple": 24.801437385908194,
+   "meets_5x_sse_concentration": true
+  }
+ },
+ "prereg_outcome": {
+  "P-S1_held": false,
+  "P-S1_detail": {
+   "shanghai": 7.128851087825842,
+   "beijing": 114.39934056018453,
+   "newyork": 24.801437385908194
+  },
+  "P-S2_held": true,
+  "P-S2_detail": {
+   "shanghai": 0.019013786306256462,
+   "beijing": 0.3308999104120175,
+   "newyork": 0.2984266088541959
+  }
+ }
+}

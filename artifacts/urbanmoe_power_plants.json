@@ -1,0 +1,225 @@
+{
+ "question": "do the worst carbon-residual tiles sit closer to real power plants than other tiles, and does the effect survive a renewable-only placebo?",
+ "why_this_is_not_circular": "ODIAC places point sources at plant coordinates from an external inventory and downscales the rest by nighttime lights. Showing the failures sit on the point sources shows the unpredictable part of the LABEL is injected from a database, not that power plants emit CO2.",
+ "source": "WRI Global Power Plant Database v1.3.0, CC-BY 4.0",
+ "protocol": {
+  "seed": 42,
+  "n_folds": 5,
+  "n_worst": 25,
+  "residual": "out-of-fold, 5-fold CV so every tile is predicted exactly once, image+POI ridge, log1p carbon target",
+  "test": "Mann-Whitney U, one-sided (worst tiles closer)",
+  "plant_inclusion": "within 2.0 km of a sampled tile"
+ },
+ "cities": {
+  "shanghai": {
+   "city": "shanghai",
+   "n_tiles": 1558,
+   "groups": {
+    "fossil": {
+     "n_plants": 17,
+     "min_capacity_mw_applied": 50.0,
+     "total_capacity_mw": 23974.0,
+     "testable": true,
+     "median_km_worst_tiles": 13.722479174728079,
+     "median_km_other_tiles": 15.787365007924043,
+     "mannwhitney_u": 15358.0,
+     "p_worst_closer": 0.044118225749565886,
+     "significant_at_0_05": true,
+     "frac_worst_within_10km": 0.08,
+     "frac_other_within_10km": 0.2811480756686236
+    },
+    "renewable": {
+     "n_plants": 5,
+     "min_capacity_mw_applied": 0.0,
+     "total_capacity_mw": 183.68,
+     "testable": true,
+     "median_km_worst_tiles": 10.207739157117167,
+     "median_km_other_tiles": 19.33747313714457,
+     "mannwhitney_u": 8028.0,
+     "p_worst_closer": 3.0230695216457063e-07,
+     "significant_at_0_05": true,
+     "frac_worst_within_10km": 0.48,
+     "frac_other_within_10km": 0.15916503587736464
+    }
+   },
+   "fossil_capacity_sweep": [
+    {
+     "min_capacity_mw": 0.0,
+     "n_plants": 18,
+     "median_km_worst_tiles": 13.722479174728079,
+     "median_km_other_tiles": 14.559165842307081,
+     "p_worst_closer": 0.15815476898815967,
+     "frac_worst_within_10km": 0.08,
+     "frac_other_within_10km": 0.30919765166340507
+    },
+    {
+     "min_capacity_mw": 50.0,
+     "n_plants": 17,
+     "median_km_worst_tiles": 13.722479174728079,
+     "median_km_other_tiles": 15.787365007924043,
+     "p_worst_closer": 0.044118225749565886,
+     "frac_worst_within_10km": 0.08,
+     "frac_other_within_10km": 0.2811480756686236
+    },
+    {
+     "min_capacity_mw": 100.0,
+     "n_plants": 17,
+     "median_km_worst_tiles": 13.722479174728079,
+     "median_km_other_tiles": 15.787365007924043,
+     "p_worst_closer": 0.044118225749565886,
+     "frac_worst_within_10km": 0.08,
+     "frac_other_within_10km": 0.2811480756686236
+    },
+    {
+     "min_capacity_mw": 300.0,
+     "n_plants": 15,
+     "median_km_worst_tiles": 13.808592690513468,
+     "median_km_other_tiles": 16.212868386346873,
+     "p_worst_closer": 0.0589023729670047,
+     "frac_worst_within_10km": 0.04,
+     "frac_other_within_10km": 0.2674494455316373
+    }
+   ]
+  },
+  "beijing": {
+   "city": "beijing",
+   "n_tiles": 2310,
+   "groups": {
+    "fossil": {
+     "n_plants": 11,
+     "min_capacity_mw_applied": 50.0,
+     "total_capacity_mw": 9306.0,
+     "testable": true,
+     "median_km_worst_tiles": 5.369194834236648,
+     "median_km_other_tiles": 27.40785421463031,
+     "mannwhitney_u": 3384.0,
+     "p_worst_closer": 1.5872765536656637e-14,
+     "significant_at_0_05": true,
+     "frac_worst_within_10km": 1.0,
+     "frac_other_within_10km": 0.1798687089715536
+    },
+    "renewable": {
+     "n_plants": 7,
+     "min_capacity_mw_applied": 0.0,
+     "total_capacity_mw": 902.5,
+     "testable": true,
+     "median_km_worst_tiles": 35.03432364106947,
+     "median_km_other_tiles": 22.189888881977858,
+     "mannwhitney_u": 41862.0,
+     "p_worst_closer": 0.9999696225903631,
+     "significant_at_0_05": false,
+     "frac_worst_within_10km": 0.0,
+     "frac_other_within_10km": 0.15929978118161925
+    }
+   },
+   "fossil_capacity_sweep": [
+    {
+     "min_capacity_mw": 0.0,
+     "n_plants": 11,
+     "median_km_worst_tiles": 5.369194834236648,
+     "median_km_other_tiles": 27.40785421463031,
+     "p_worst_closer": 1.5872765536656637e-14,
+     "frac_worst_within_10km": 1.0,
+     "frac_other_within_10km": 0.1798687089715536
+    },
+    {
+     "min_capacity_mw": 50.0,
+     "n_plants": 11,
+     "median_km_worst_tiles": 5.369194834236648,
+     "median_km_other_tiles": 27.40785421463031,
+     "p_worst_closer": 1.5872765536656637e-14,
+     "frac_worst_within_10km": 1.0,
+     "frac_other_within_10km": 0.1798687089715536
+    },
+    {
+     "min_capacity_mw": 100.0,
+     "n_plants": 11,
+     "median_km_worst_tiles": 5.369194834236648,
+     "median_km_other_tiles": 27.40785421463031,
+     "p_worst_closer": 1.5872765536656637e-14,
+     "frac_worst_within_10km": 1.0,
+     "frac_other_within_10km": 0.1798687089715536
+    },
+    {
+     "min_capacity_mw": 300.0,
+     "n_plants": 9,
+     "median_km_worst_tiles": 5.426057782472408,
+     "median_km_other_tiles": 27.953305010593862,
+     "p_worst_closer": 1.602119256732033e-14,
+     "frac_worst_within_10km": 0.96,
+     "frac_other_within_10km": 0.15579868708971553
+    }
+   ]
+  },
+  "newyork": {
+   "city": "newyork",
+   "n_tiles": 1091,
+   "groups": {
+    "fossil": {
+     "n_plants": 21,
+     "min_capacity_mw_applied": 50.0,
+     "total_capacity_mw": 5423.299999999999,
+     "testable": true,
+     "median_km_worst_tiles": 2.4282296079120247,
+     "median_km_other_tiles": 9.559304736671521,
+     "mannwhitney_u": 4264.0,
+     "p_worst_closer": 2.975613940386508e-09,
+     "significant_at_0_05": true,
+     "frac_worst_within_10km": 0.92,
+     "frac_other_within_10km": 0.5150093808630394
+    },
+    "renewable": {
+     "n_plants": 22,
+     "min_capacity_mw_applied": 0.0,
+     "total_capacity_mw": 130.4,
+     "testable": true,
+     "median_km_worst_tiles": 12.432367313687925,
+     "median_km_other_tiles": 11.040402168805553,
+     "mannwhitney_u": 14236.0,
+     "p_worst_closer": 0.720831000001422,
+     "significant_at_0_05": false,
+     "frac_worst_within_10km": 0.28,
+     "frac_other_within_10km": 0.4643527204502814
+    }
+   },
+   "fossil_capacity_sweep": [
+    {
+     "min_capacity_mw": 0.0,
+     "n_plants": 40,
+     "median_km_worst_tiles": 1.3022959167102242,
+     "median_km_other_tiles": 6.312662856604457,
+     "p_worst_closer": 1.1237866586455142e-10,
+     "frac_worst_within_10km": 1.0,
+     "frac_other_within_10km": 0.724202626641651
+    },
+    {
+     "min_capacity_mw": 50.0,
+     "n_plants": 21,
+     "median_km_worst_tiles": 2.4282296079120247,
+     "median_km_other_tiles": 9.559304736671521,
+     "p_worst_closer": 2.975613940386508e-09,
+     "frac_worst_within_10km": 0.92,
+     "frac_other_within_10km": 0.5150093808630394
+    },
+    {
+     "min_capacity_mw": 100.0,
+     "n_plants": 14,
+     "median_km_worst_tiles": 5.940063712401951,
+     "median_km_other_tiles": 10.17702034073622,
+     "p_worst_closer": 4.4184641257583424e-07,
+     "frac_worst_within_10km": 0.84,
+     "frac_other_within_10km": 0.49343339587242024
+    },
+    {
+     "min_capacity_mw": 300.0,
+     "n_plants": 5,
+     "median_km_worst_tiles": 11.959217732933585,
+     "median_km_other_tiles": 19.247851005857985,
+     "p_worst_closer": 0.00015058410884167314,
+     "frac_worst_within_10km": 0.4,
+     "frac_other_within_10km": 0.23921200750469043
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "purpose": "Sufficiency test: a diagnostic, not a method contribution. No score here is a performance result.",
+ "framing_constraint": "never describe a resulting R2 as a performance win, never place it in a table against UrbanMoE, never count it toward the 0.80 bar. The finding is that the only feature closing the gap is the label's own source, which no image can contain.",
+ "preregistration": {
+  "written": "before the first run",
+  "P-B1": "odiacpoint lifts Beijing carbon >= +0.10 paired and does NOT lift Shanghai (< +0.02); falsified if Shanghai gains >= +0.10 or Beijing gains < +0.10",
+  "P-B2": "plants gains less than odiacpoint on Beijing carbon (vintage trap); falsified if plants >= odiacpoint there",
+  "P-B3": "New York gains from odiacpoint but less than Beijing; falsified if New York's gain exceeds Beijing's"
+ },
+ "odiac_year": 2015,
+ "odiac_version": "v2024",
+ "detection_ratio": 20.0,
+ "block_placement": "both blocks join the POI block, as the osmv2 layers do, so the architecture and ladder are unchanged and block scaling by sqrt(width) is inherited from the probe",
+ "columns": {
+  "plants": {
+   "dist_km_nearest_fossil50": "the plant-proximity statistic itself, encoded directly",
+   "log1p_invdist_capacity": "sum of capacity_mw / (distance_km + 1); ODIAC's point term is emissions-weighted and capacity is the public proxy for emissions",
+   "log1p_count_2km": "sources within roughly one tile width, where the oracle ceiling concentrates (92% of Beijing's error within 2 km)",
+   "log1p_count_10km": "the radius the plant cross-check reports its fractions at",
+   "log1p_max_capacity_5km": "a tile's point term is dominated by its single largest plant, not by how many plants are nearby",
+   "log1p_capacity_sum_5km": "the extensive companion to the max, since adjacent units at one site are listed as separate plants"
+  },
+  "odiacpoint": {
+   "log1p_point_tonneC_in_tile": "the label's own injected mass inside the tile, area-weighted with the same rule as the rest of the forensics",
+   "dist_km_nearest_point_cell": "distance to the nearest detected source, so tiles just outside one are distinguishable from tiles far from any",
+   "log1p_point_tonneC_within_5km": "nearby injected mass; ODIAC's plant geolocation has documented error (Oda and Maksyutov 2011) so the exact cell may be offset from the true site"
+  }
+ },
+ "cities": {
+  "shanghai": {
+   "plants": {
+    "path": "project/artifacts/features/urbanmoe_shanghai_plants.npz",
+    "poi_width": "38 -> 44",
+    "n_rows": 1558
+   },
+   "odiacpoint": {
+    "path": "project/artifacts/features/urbanmoe_shanghai_odiacpoint.npz",
+    "poi_width": "38 -> 41",
+    "n_rows": 1558
+   },
+   "n_detected_sources": 11,
+   "median_dist_km_nearest_fossil50": 15.696217783930377,
+   "median_dist_km_nearest_point_cell": 17.469251493236463,
+   "n_tiles_with_point_mass": 17
+  },
+  "beijing": {
+   "plants": {
+    "path": "project/artifacts/features/urbanmoe_beijing_plants.npz",
+    "poi_width": "38 -> 44",
+    "n_rows": 2310
+   },
+   "odiacpoint": {
+    "path": "project/artifacts/features/urbanmoe_beijing_odiacpoint.npz",
+    "poi_width": "38 -> 41",
+    "n_rows": 2310
+   },
+   "n_detected_sources": 8,
+   "median_dist_km_nearest_fossil50": 27.187039783652065,
+   "median_dist_km_nearest_point_cell": 25.84884047377735,
+   "n_tiles_with_point_mass": 13
+  },
+  "newyork": {
+   "plants": {
+    "path": "project/artifacts/features/urbanmoe_newyork_plants.npz",
+    "poi_width": "38 -> 44",
+    "n_rows": 1091
+   },
+   "odiacpoint": {
+    "path": "project/artifacts/features/urbanmoe_newyork_odiacpoint.npz",
+    "poi_width": "38 -> 41",
+    "n_rows": 1091
+   },
+   "n_detected_sources": 22,
+   "median_dist_km_nearest_fossil50": 9.332004871947833,
+   "median_dist_km_nearest_point_cell": 9.733315480401773,
+   "n_tiles_with_point_mass": 29
+  }
+ }
+}

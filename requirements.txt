@@ -1,0 +1,17 @@
+# Python 3.11. Pinned to the environment the scripts were developed in.
+# pip installs the CPU build of torch; for a CUDA build, install torch from pytorch.org first.
+numpy==2.4.4
+pandas==3.0.1
+scipy==1.17.1
+scikit-learn==1.8.0
+matplotlib==3.10.8
+rasterio==1.4.4
+shapely==2.1.2
+osmium==4.3.1
+osmnx==2.1.0
+torch==2.10.0
+transformers==5.6.0
+sentencepiece==0.2.1
+protobuf==6.33.5
+pillow==12.1.1
+tqdm==4.67.3

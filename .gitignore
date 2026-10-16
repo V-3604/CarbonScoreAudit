@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+
+# Third-party data and everything the pipeline regenerates
+data/
+artifacts/embeddings/
+artifacts/features/
+artifacts/reports/
+figures/

@@ -1,0 +1,153 @@
+{
+ "question": "are the UrbanMoE targets independent constructs, or is carbon a population proxy?",
+ "verdict": {
+  "collinearity_flag": 0.8,
+  "flagged_pairs": {
+   "shanghai": {
+    "carbon~population": 0.8131
+   }
+  },
+  "carbon_from_population_r2": {
+   "shanghai": 0.6611,
+   "beijing": 0.1918,
+   "newyork": 0.1564
+  }
+ },
+ "per_city": {
+  "shanghai": {
+   "city": "shanghai",
+   "n_rows": 1558,
+   "columns": [
+    "filename",
+    "c_value",
+    "pop_value",
+    "light_value"
+   ],
+   "ranges": {
+    "carbon": [
+     0.0,
+     33.32417
+    ],
+    "population": [
+     0.0003377192497253,
+     32.39063125
+    ],
+    "light": [
+     0.002437584,
+     6.3080344
+    ]
+   },
+   "pearson": {
+    "carbon~population": 0.8131,
+    "carbon~light": 0.6655,
+    "population~light": 0.5365
+   },
+   "spearman": {
+    "carbon~population": 0.8008,
+    "carbon~light": 0.8918,
+    "population~light": 0.7805
+   },
+   "r2_from_others": {
+    "carbon": 0.7349,
+    "carbon<-population": 0.6611,
+    "carbon<-light": 0.4429,
+    "population": 0.6611,
+    "population<-carbon": 0.6611,
+    "population<-light": 0.2879,
+    "light": 0.443,
+    "light<-carbon": 0.4429,
+    "light<-population": 0.2879
+   }
+  },
+  "beijing": {
+   "city": "beijing",
+   "n_rows": 2310,
+   "columns": [
+    "filename",
+    "c_value",
+    "pop_value",
+    "light_value"
+   ],
+   "ranges": {
+    "carbon": [
+     0.0,
+     224.35153
+    ],
+    "population": [
+     0.0,
+     7.6422
+    ],
+    "light": [
+     0.072437716,
+     32.41081
+    ]
+   },
+   "pearson": {
+    "carbon~population": 0.4379,
+    "carbon~light": 0.5151,
+    "population~light": 0.7326
+   },
+   "spearman": {
+    "carbon~population": 0.8283,
+    "carbon~light": 0.9377,
+    "population~light": 0.8703
+   },
+   "r2_from_others": {
+    "carbon": 0.2733,
+    "carbon<-population": 0.1918,
+    "carbon<-light": 0.2654,
+    "population": 0.5417,
+    "population<-carbon": 0.1918,
+    "population<-light": 0.5367,
+    "light": 0.5834,
+    "light<-carbon": 0.2654,
+    "light<-population": 0.5367
+   }
+  },
+  "newyork": {
+   "city": "newyork",
+   "n_rows": 1091,
+   "columns": [
+    "filename",
+    "c_value",
+    "pop_value",
+    "light_value"
+   ],
+   "ranges": {
+    "carbon": [
+     0.0,
+     217.41049
+    ],
+    "population": [
+     0.0,
+     56.160805
+    ],
+    "light": [
+     0.0,
+     68.8548
+    ]
+   },
+   "pearson": {
+    "carbon~population": 0.3954,
+    "carbon~light": 0.551,
+    "population~light": 0.756
+   },
+   "spearman": {
+    "carbon~population": 0.8191,
+    "carbon~light": 0.9174,
+    "population~light": 0.8685
+   },
+   "r2_from_others": {
+    "carbon": 0.3046,
+    "carbon<-population": 0.1564,
+    "carbon<-light": 0.3036,
+    "population": 0.5721,
+    "population<-carbon": 0.1564,
+    "population<-light": 0.5715,
+    "light": 0.6468,
+    "light<-carbon": 0.3036,
+    "light<-population": 0.5715
+   }
+  }
+ }
+}
